@@ -1,0 +1,40 @@
+{%extends 'base.html'%}
+{%block head%}
+<style>
+    table th {
+        text-align: left;
+    }
+</style>
+{%endblock head%}
+
+{%block body%}
+<table id="model01" class="table table-bordered table-hover table-striped">
+    <thead>
+    <th colspan="8" style="background:#E3E3E3;">
+        <h4 style="background:#E3E3E3; text-align:center; font-weight:bold">网络设备主要信息概览</h4>
+    </th>
+    <tr>
+        <th>网络设备ip</th>
+        <th>网络设备名</th>
+        <th>安装机柜位置</th>
+        <th>安装层数</th>
+        <th>查看端口情况</th>
+        <th>更改位置</th>
+    </tr>
+    </thead>
+    <tbody>
+    {%for network in page%}
+    <tr>
+        <td>{{network.host_ip}}</td>
+        <td>{{network.host_name}}</td>
+        <td>J0{{network.net_cab_id}}</td>
+        <td>第{{network.u_lev}}U</td>
+        <td><a href="/record/login/{{network.host_ip}}">修改</a></td>
+        <td><a href="/record/revise_net/{{network.host_ip}}">修改</a></td>
+    </tr>
+    {%endfor%}
+    </tbody>
+</table>
+{%endblock body%}
+
+

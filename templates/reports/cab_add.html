@@ -1,0 +1,105 @@
+{%extends 'base.html'%}
+{%block head%}
+<style>
+    .register{
+        padding-top: 150px;
+        padding-bottom: 200px;
+        color: red;
+        text-align: center;
+        font-family: 'Microsoft Yahei';
+    }
+</style>
+
+
+<script>
+    $(function(){
+        var $cab_num = $("#cab_num");
+        var $cab_u = $("#cab_u");
+        var cab_num_ok = false;
+        var cab_u_ok = false;
+
+        $cab_num.blur(function(){
+            var cab_num = cab_num.val();
+            var len = cab_num.length;
+            if(len!=3){
+                $cab_num.next().html('请输入正确的机柜编号！').show();
+                cab_num_ok = false;
+            }else{
+                $cab_num.next().hide();
+                cab_num_ok = true;
+            }
+        });
+
+        $cab_num.blur(function(){
+            var cab_num = cab_num.val();
+            var len = cab_num.length;
+            if(len!=3){
+                $cab_num.next().html('请输入正确的机柜编号！').show();
+                cab_num_ok = false;
+            }else{
+                $cab_num.next().hide();
+                cab_num_ok = true;
+            }
+        });
+</script>
+{%endblock head%}
+
+{%block body%}
+    <div class="form-horizontal col-sm-offset-4" style="padding-top:100px;padding-bottom: 100px;">
+        <form action="/reports/cab_add/" method="post">
+            {% csrf_token %}
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">机柜编号：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="cab_num" id="cab_num" value="{{cab_num}}" placeholder="Number">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">机柜总U数：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="cab_u" id="cab_u" value="{{cab_u}}" placeholder="42">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">机柜高度(米)：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="cab_high" id="cab_high" value="{{cab_high}}" placeholder="2.2">
+                    </div>
+                </div>
+                            <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">机柜宽度(米)：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="cab_width" id="cab_width" value="{{cab_width}}" placeholder="0.8">
+                    </div>
+                </div>
+                            <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">机柜深度(米)：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="cab_deep" id="cab_deep" value="{{cab_deep}}" placeholder="1">
+                    </div>
+                </div>
+                            <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">机柜物理位置 x：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="cab_x" id="cab_x" value="{{cab_x}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">机柜物理位置 y：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="cab_y" id="cab_y" value="{{cab_y}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                <label for="" class="col-sm-2 control-label"></label>
+                    <div class="col-sm-3">
+                <button type="reset" >重置</button>
+                <button type="submit" style="margin-left: 80px;">提交</button>
+                    </div>
+               </div>
+            </form>
+        </div>
+    </div>
+{%endblock body%}
+
+

@@ -1,0 +1,204 @@
+{%extends 'base.html'%}
+{%block head%}
+
+<style>
+    table th {
+        text-align: center;
+    }
+
+    .scan{
+        font-size:20px;
+    }
+
+    .form-group{
+        font-size:20px;
+
+    }
+
+    /*pre标签不会自动换行第二个是换行，第一个是滚动条*/
+	#state_exe_result{
+        overflow-y: auto;
+		white-space: pre-wrap;
+    }
+
+</style>
+{%endblock head%}
+
+
+
+{% block custom_js %}
+	<script>
+		$(function () {
+
+		    // 响应式调整页面高度
+    		$(window).resize(function() {
+    		    // 结果打印框pre高度不然默认是没高度的
+	        	$('.overflow_result').css(
+	        		"height",$('.hall').height()*0.8);
+
+                // 扫描的输入表单单独适应窗口高度，不然如果以后我添加更多的扫描东西越来越长的时候会出现
+                // 整个右侧栏出现滚动条，我这样设置以后只会扫描表单那一块出现滚动，而不会然右边的结果框出现滚动条
+                $('.overflow_set').css(
+                    "height", $('.hall').height() * 0.85);
+            });
+    		$(window).resize();
+
+                var $btn = $(this).button('loading');
+                $("#state_exe_result").text("正在执行.....");
+                $.ajax({
+					url:"{% url 'module_deploy' %}",
+					type:'POST',
+					dataType:'json',
+                    //如果数据是列表即数组的话要加下面这个traditional不然传不过去
+					traditional:true,
+					data:{
+                        'tgt':tgt,
+                        'tgt_type':tgt_type,
+                        'other_arg':other_arg,
+                        'arg':arg,
+                        'module_deploy_tag_key':'state_exe'
+					},
+					success:function(result){
+						if(result.status){
+							$('#state_exe_result').html('');
+							for(var i = 0; i < result.result.length; i++){
+//                                console.log(result.result[i]);
+								if(result.result[i].indexOf("Result: False")>-1){
+									$('#state_exe_result').append("<p style='color: #A00000;'>"+result.result[i]+"</p>");
+								}else if(result.result[i].indexOf("ChangesIs")>-1){
+									$('#state_exe_result').append("<p style='color: #00A0A0;'>"+result.result[i]+"</p>");
+								}else if(result.result[i].indexOf("Failed:")>-1){
+//									对汇总的第一行数据中成功失败还有改变做字体颜色区分，即修改颜色
+									var reg1=/Failed:([^\r\n]+)/g;
+									var str1=result.result[i].match(reg1);
+									var reg2=/Succeeded:([^\r\n]+)/g;
+									var str2=result.result[i].match(reg2);
+									var rep_r=result.result[i].replace(reg1,"<span style='color: #A00000;'>"+str1+"</span>");
+									rep_r=rep_r.replace(reg2,"<span style='color: #00B600;'>"+str2+"</span>");
+									$('#state_exe_result').append("<p style='color: #00A0A0;'>"+rep_r+"</p>");
+								}else{
+									$('#state_exe_result').append("<p style='color: #00B600;'>"+result.result[i]+"</p>");
+								}
+							}
+                            $btn.button('reset');
+						}else {
+						    $("#state_exe_result").empty();
+                            var data_count = 0;
+                            if(typeof(result.result) == 'string'){
+                                $('#state_exe_result').html("<p style='color: #BF0000;'>"+result.result+"</p>");
+                                $btn.button('reset');
+                            }
+                            else{
+                                $.each(result.result,function (k,v) {
+                                if($.isPlainObject(v)){
+                                    $('#state_exe_result').append("<p style='color: #BF0000;font-weight: bold;'>"+k+":</p>");
+                                    result_fun(v,data_count+1);
+                                    $('#state_exe_result').append('\n\n');
+                                }else if($.isArray(v)){
+                                    $('#state_exe_result').append("<p style='color: #BF0000;font-weight: bold;'>"+k+":</p>");
+                                    result_fun(v,data_count+1);
+                                    $('#state_exe_result').append('\n\n');
+                                }else{
+                                    $('#state_exe_result').append("<p style='color: #BF0000;font-weight: bold;'>"+k+":</p>");
+                                    $('#state_exe_result').append("<p style='padding-left: 25px;'>"+v+"</p>");
+                                    $('#state_exe_result').append('\n\n');
+                                }
+                                });
+                                $btn.button('reset');
+                            }
+
+                            // $('#state_exe_result').html("<p style='color: #A00000;'>"+result.result+"</p>");
+                            // $btn.button('reset');
+                        }
+
+					}
+				});
+            });
+
+            // 结果输出格式化 递归函数
+            var result_fun = function (data,data_count) {
+                if(!data) return;
+                $.each(data,function(k,v){
+                    if($.isPlainObject(v)){
+                        $('#state_exe_result').append("<p style='color: #3FB8AF;padding-left: "+data_count*25+"px;'>"+k+":</p>");
+                        result_fun(v,data_count+1)
+                    }else if($.isArray(v)){
+                        $('#state_exe_result').append("<p style='color: #3FB8AF;padding-left: "+data_count*25+"px;'>"+k+":</p>");
+                        result_fun(v,data_count+1)
+                    }else{
+                        $('#state_exe_result').append("<p style='color: #3FB8AF;padding-left: "+data_count*25+"px;'>"+k+":</p>");
+                        $('#state_exe_result').append("<p style='padding-left: "+(data_count+1)*25+"px;'>"+v+"</p>");
+                    }
+                });
+            };
+		});
+	</script>
+{% endblock %}
+
+
+
+{%block body%}
+    <div class="container-fluid zerolmp">
+        <div class="row">
+            <div style="clear:both;float:left; margin-top: 30px; width: 18%; padding: 0px 10px 0;">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a data-toggle="collapse" data-target="#list-group-1" id="platform1">
+                            <span class="glyphicon glyphicon-th-large"></span>
+                            自动化平台<span class="caret pull-right"></span>
+                        </a>
+                        <div id="list-group-1" class="collapse list-group-div">
+                            <ul style="margin-bottom: 0px;padding-bottom: 0px; text-indent: 3px" class="list-group">
+                                <li class="list-group-item">
+                                    <a href="/record/module_deploy/"><span class="glyphicon  glyphicon-book"></span> 批量执行模块</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#"><span class="glyphicon  glyphicon-book"></span>定时任务</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <script type="text/javascript">
+                var List = {{List|safe}};
+                console.log(List)
+            </script>
+            <div class="form-horizontal col-sm-offset-4" style="padding-top:100px;padding-bottom: 100px;">
+                <form action="/record/module_deploy/" method="post">
+                    {% csrf_token %}
+                    <div class="scan" >
+                        当前可执行命令的存活设备IP：
+                        {{List}}
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">需要控制的设备IP：</label>
+                        <div class="col-sm-3">
+                        <input type="text" class="form-control" name="operate_ip" id="operate_ip" value="{{operate_ip}}" placeholder="192.168.1.1 , 192.168.1.2">
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">需要执行的命令：</label>
+                        <div class="col-sm-3">
+                        <input type="text" class="form-control" name="operate_order" id="operate_order" value="{{operate_order}}" placeholder="ping">
+                        </div>
+                    </div>
+                    <form method = "post" action ="/record/module_operate/">
+                        <button type="submit" class= margin >提交</button>
+                    </form>
+
+                    <div class="form-group col-md-6 overflow_result" style="padding-top: 30px;">
+		                <label class="label label-danger " style="font-size: 16px;">结果打印</label>
+		                <!-- 结果打印 -->
+		                <!-- 下面这个列数cols弄100%比较大，高度我用h45来按浏览器调整，style是禁止拉伸 -->
+		                <!--注意如果使用标签textarea的字体一定要设置等宽字体，因为普通的字体在输出的时候无法和在linux下面一样，想要输出程序代码的原样，最好用等宽字体，不用你自己看下有多难看就知道这里用了font-family: monospace;自带的等宽字体-->
+		                <!--最后我发现可以直接用prc标签这个标签可以完美的输出后端代码的格式哈哈不过换行和滚动条还是要加在上面的style里-->
+		                <pre class="form-control " id="state_exe_result"  style="resize:none;font-weight: bold;line-height:100%;height: 100%;margin-top: 4px;background-color:#000;color:#00B600;"></pre>
+	                </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{%endblock body%}

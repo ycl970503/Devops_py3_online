@@ -1,0 +1,64 @@
+{%extends 'base.html'%}
+{%block head%}
+    <style></style>
+    <script src="/static/js/echarts.min.js"></script>
+{%endblock head%}
+    {%block body%}
+        <div class="container-fluid zerolmp">
+            <div class="row">
+                <div style="clear:both;float:left; margin-top: 30px; width: 18%; padding: 0px 10px 0;">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a data-toggle="collapse" data-target="#list-group-1" id="platform1">
+                                <span class="glyphicon glyphicon-th-large"></span>
+                                资产报表<span class="caret pull-right"></span>
+                            </a>
+                            <div id="list-group-1" class="collapse list-group-div">
+                                <ul style="margin-bottom: 0px;padding-bottom: 0px; text-indent: 3px" class="list-group">
+                                    <li class="list-group-item">
+                                        <a href="/reports/histogram/"><span class="glyphicon  glyphicon-book"></span> 设备数量报表</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="/reports/rack/"><span class="glyphicon  glyphicon-book"></span> 机柜图</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div style="width: 80%; float: right; padding-top: 30px;">
+    <div id="main" style="width: 800px;height:500px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var List = {{List|safe}};
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '资产数量'
+            },
+            tooltip: {},
+            legend: {
+                data:['数量']
+            },
+            xAxis: {
+                data: [ "物理服务器","虚拟服务器","网络设备","其它设备"]
+            },
+            yAxis: {},
+            series: [{
+                name: '数量',
+                type: 'bar',
+                data: List
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+                </div>
+
+            </div>
+        </div>
+{%endblock body%}

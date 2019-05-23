@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+{%block head%}
+<style>
+    table th {
+        text-align: center;
+    }
+</style>
+{%endblock head%}
+
+{%block body%}
+<table id="" class="table table-bordered table-hover table-striped">
+    <thead>
+    <th colspan="8" style="background:#E3E3E3;">
+        <h4 style="background:#E3E3E3; text-align:center; font-weight:bold">端口详情</h4>
+    </th>
+    <tr>
+        <th>所有端口</th>
+        <th>端口状态</th>
+    </tr>
+    </thead>
+    <tbody>
+    {%for key,value in dict.items %}
+    <tr>
+        <td>{{key}}</td>
+        <td>{{value}}</td>
+    </tr>
+    {%endfor%}
+    </tbody>
+</table>
+
+{%endblock body%}
+
+

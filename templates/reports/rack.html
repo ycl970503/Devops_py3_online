@@ -1,0 +1,79 @@
+{%extends 'base.html'%}
+{%block head%}
+    <style></style>
+    <script src="/static/js/echarts.min.js"></script>
+{%endblock head%}
+    {%block body%}
+        <div class="container-fluid zerolmp">
+            <div class="row">
+                <div style="clear:both;float:left; margin-top: 30px; width: 18%; padding: 0px 10px 0;">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a data-toggle="collapse" data-target="#list-group-1" id="platform1">
+                                <span class="glyphicon glyphicon-th-large"></span>
+                                资产报表<span class="caret pull-right"></span>
+                            </a>
+                            <div id="list-group-1" class="collapse list-group-div">
+                                <ul style="margin-bottom: 0px;padding-bottom: 0px; text-indent: 3px" class="list-group">
+                                    <li class="list-group-item">
+                                        <a href="/reports/histogram/"><span class="glyphicon  glyphicon-book"></span> 设备数量报表</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="/reports/rack/"><span class="glyphicon  glyphicon-book"></span> 机柜图</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div style="width: 80%; float: right; padding-top: 30px;">
+                    <div id="chartmain" style="height: 400px; margin: auto 20px;"></div>
+                    <script type="text/javascript">
+                        var List = {{List|safe}};
+                        console.log(List)
+                        var data = [List]
+                        var myChart = echarts.init(document.getElementById('chartmain'));
+                        var option = {
+                            xAxis: {
+                                max: 7
+                            },
+                            yAxis: {
+                                max: 3
+                            },
+                            series: [{
+                                symbolSize: 20,
+                                data: data[0],
+                                type: 'scatter',
+                                label: {
+                                    emphasis: {
+                                        show :true,
+                                        formatter: function(param){
+                                            return param.data[2];
+                                        },
+                                        position: 'top'
+                                    }
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        shadowBlur: 10,
+                                        shadowColor: "rgba(120,36,50,0.5)",
+                                        shadowOffsetY: 5,
+                                        color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                                            offset: 0,
+                                            color: 'rgb(251,118,123)'
+                                        },{
+                                            offset: 1,
+                                            color: 'rgb(204,46,72)'
+                                        }])
+                                    }
+                                }
+                            }]
+                    };
+                    myChart.setOption(option);
+                    </script>
+                </div>
+
+            </div>
+        </div>
+
+{%endblock body%}

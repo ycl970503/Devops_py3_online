@@ -1,0 +1,82 @@
+{%extends 'base.html'%}
+{%block head%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>map-report</title>
+    <script src="/static/js/echarts.min.js"></script>
+
+</head>
+<style>
+    .notice{
+        color: red;
+        display: none;
+        font-size: 14px;
+        font-family: 'Microsoft Yahei';
+    }
+</style>
+{%endblock head%}
+
+{%block body%}
+        <div class="container-fluid zerolmp">
+            <div class="row">
+                <div style="clear:both;float:left; margin-top: 30px; width: 18%; padding: 0px 10px 0;">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a data-toggle="collapse" data-target="#list-group-1" id="platform1">
+                                <span class="glyphicon glyphicon-th-large"></span>
+                                用户中心<span class="caret pull-right"></span>
+                            </a>
+                            <div id="list-group-1" class="collapse list-group-div" style="text-indent: 3px;">
+                                <ul style="margin-bottom: 0px;padding-bottom: 0px; text-indent: 3px" class="list-group">
+                                    <li class="list-group-item">
+                                        <a href="/user/user_center/"><span class="glyphicon  glyphicon-book"></span>个人资料</a>
+                        <!--            </li>
+                                    <li class="list-group-item">
+                                        <a href="/reports/rack/"><span class="glyphicon  glyphicon-book"></span> 修改信息</a>
+                                   </li>
+                          -->
+                                    <li class="list-group-item">
+                                        <a href="/user/register/"><span class="glyphicon  glyphicon-book"></span> 新建用户</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-horizontal col-sm-offset-4" style="padding-top:50px;padding-bottom: 30px;">
+                   <table class="table table-hover table-striped">
+                       <thead>
+                       <th colspan="3" style="background:#E3E3E3;">
+                                <h4 style="background:#E3E3E3; font-weight:bold"> {{detail_name}}详细信息</h4>
+                       </th>
+                            <tr>
+                                <th style="width:20%;">编号</th>
+                                <th style="width:30%; text-align: left;">名称</th>
+                                <th style="width:50%; text-align: left;">值</th>
+                            </tr>
+                       </thead>
+                       <tbody>
+                       <tr>
+                           <th scope="row">1</th>
+                           <th style="text-align: left;">当前用户名</th>
+                           <td style="text-align: left;">{{user_name}}</td>
+                       </tr>
+                       <tr>
+                           <th scope="row">2</th>
+                           <th style="text-align: left;">邮箱地址</th>
+                           <td style="text-align: left;">{{user_email}}</td>
+                       </tr>
+                       <tr>
+                           <th scope="row">3</th>
+                           <th style="text-align: left;">用户权限</th>
+                           <td style="text-align: left;">{{user_level}}</td>
+                       </tr>
+                       </tbody>
+                   </table>
+               </div>
+            </div>
+        </div>
+{%endblock body%}

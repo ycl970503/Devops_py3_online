@@ -1,0 +1,75 @@
+{%extends 'base.html'%}
+{%block head%}
+<style>
+    .register{
+        padding-top: 150px;
+        padding-bottom: 200px;
+        color: red;
+        text-align: center;
+        font-family: 'Microsoft Yahei';
+    }
+</style>
+
+<script>
+
+</script>
+{%endblock head%}
+
+{%block body%}
+    <div class="form-horizontal col-sm-offset-4" style="padding-top:100px;padding-bottom: 100px;">
+        <form action="/reports/phy_add/" method="post">
+            {% csrf_token %}
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">服务器IP：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="server_ip" id="server_ip" value="{{server_ip}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">服务器品牌：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="machine_brand" id="machine_brand" value="{{machine_brand}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">操作系统版本：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="system_ver" id="system_ver" value="{{system_ver}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">操作系统主机名：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="sys_hostname" id="sys_hostname" value="{{sys_hostname}}" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">MAC地址：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="mac" id="mac" value="{{mac}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">安装的机柜编号：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="ser_cabin" id="ser_cabin" value="{{ser_cabin}}" placeholder="J01">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">安装在第几U：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="phy_u" id="phy_u" value="{{phy_u}}" placeholder="1U">
+                    </div>
+                </div>
+
+<div class="form-group">
+                <button type="reset" >重置</button>
+                <button type="submit" class= margin>提交</button>
+     </div>
+
+            </form>
+        </div>
+    </div>
+{%endblock body%}
+
+

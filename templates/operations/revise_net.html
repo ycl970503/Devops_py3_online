@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{%block head%}
+<style>
+    .register{
+        padding-top: 150px;
+        padding-bottom: 200px;
+        color: red;
+        text-align: center;
+        font-family: 'Microsoft Yahei';
+    }
+</style>
+
+<script>
+
+</script>
+{%endblock head%}
+
+{%block body%}
+    <div class="form-horizontal col-sm-offset-4" style="padding-top:100px;padding-bottom: 100px;">
+        <form action="/record/revisee_net/" method="">
+            {% csrf_token %}
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">设备IP地址：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="list" id="list" value="{{list}}" readonly unselectable="on">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">机柜编号：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="net_cab" id="net_cab" value="{{net_cab}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">机柜层数：</label>
+                    <div class="col-sm-3">
+                    <input type="text" class="form-control" name="net_u" id="net_u" value="{{net_u}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                <label for="" class="col-sm-2 control-label"></label>
+                    <div class="col-sm-3">
+                <button type="reset" >重置</button>
+                <button type="submit" style="margin-left: 80px;">提交</button>
+                    </div>
+               </div>
+            </form>
+        </div>
+    </div>
+{%endblock body%}
+
+
