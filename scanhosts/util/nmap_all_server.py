@@ -63,8 +63,8 @@ def snmp_begin(nmap_type,ports,password_list,i_key_file,syscmd_list,black_list,s
     logger.info("Use key login:%s,%s"%(key_login_list,key_not_login_list))
 
 
-    # email_message = u"(1)可以ssh 用户密码登录的服务器列表: \n %s \n \n (2)可以ssh 用户密钥登录的服务器列表 \n %s \n \n(3)无法ssh登录列表 \n %s \n \n (4)未知主机 \n %s"%(canlogin_list,key_login_list,notlogin_list,unkown_list)
-    email_message = u"发不出去我现在也很绝望啊"
+    email_message = u"(1)可以ssh 用户密码登录的服务器列表: \n %s \n \n (2)可以ssh 用户密钥登录的服务器列表 \n %s \n \n(3)无法ssh登录列表 \n %s \n \n (4)未知主机 \n %s"%(canlogin_list,key_login_list,notlogin_list,unkown_list)
+    # email_message = u"发不出去我现在也很绝望啊"
 
     email_sub = u"系统扫描结果"
     receive_addr = s_emails

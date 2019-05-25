@@ -1,9 +1,13 @@
 {%extends 'base.html'%}
 {%block head%}
 <style>
-    table th,
+    table th{
+        text-align: center;
+        font-size:20px;
+    }
     table td {
         text-align: center;
+        font-size:20px;
     }
 </style>
 {%endblock head%}
@@ -68,24 +72,24 @@
         <td style="text-align: left;"><a href="/detail_c/?dID={{item.conn_vir_id}}" target="_blank">ID={{item.conn_vir_id}}</a></td>
     </tr>
     <tr>
-        <th scope="row">10</th>
-        <td style="text-align: left;">使用状态</td>
-        <td style="text-align: left;">
-            <form action="/record/state_handdle/?detail_type=p" method="post" class="form-inline">
-                <input type="text" name="conn_id" value="{{item.conn_vir_id}}" style="display: none">
-                <select class="form-control" name="state">
-                    <option>{{sn_states|get_state:item.conn_vir_id}}</option>
-                    <option class="divider">-------------</option>
-                    <option>下线</option>
-                    <option>线上运行</option>
-                    <option>测试使用</option>
-                    <option>已报废</option>
-                </select>
-<!--                <button type="submit" class="btn btn-default btn-success">提交修改</button>-->
-            </form>
+<!--        <th scope="row">10</th>-->
+<!--&lt;!&ndash;        <td style="text-align: left;">使用状态</td>&ndash;&gt;-->
+<!--        <td style="text-align: left;">-->
+<!--            <form action="/record/state_handdle/?detail_type=p" method="post" class="form-inline">-->
+<!--                <input type="text" name="conn_id" value="{{item.conn_vir_id}}" style="display: none">-->
+<!--&lt;!&ndash;                <select class="form-control" name="state">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option>{{sn_states|get_state:item.conn_vir_id}}</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option class="divider">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option>下线</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option>线上运行</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option>测试使用</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option>已报废</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                </select>&ndash;&gt;-->
+<!--&lt;!&ndash;                <button type="submit" class="btn btn-default btn-success">提交修改</button>&ndash;&gt;-->
+<!--            </form>-->
 
-        </td>
-    </tr>
+<!--        </td>-->
+<!--    </tr>-->
     </tbody>
 </table>
 

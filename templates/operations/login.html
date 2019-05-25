@@ -8,21 +8,21 @@
 {%endblock head%}
 
 {%block body%}
-<table id="" class="table table-bordered table-hover table-striped">
+<table align = "center" id="" class="table table-bordered table-hover table-striped">
     <thead>
     <th colspan="8" style="background:#E3E3E3;">
-        <h4 style="background:#E3E3E3; text-align:center; font-weight:bold">端口详情</h4>
+        <h4 style="background:#E3E3E3; text-align:center; font-weight:bold"><font size="5">端口详情</font></h4>
     </th>
     <tr>
-        <th>所有端口</th>
-        <th>端口状态</th>
+        <th><font size="4">所有端口</font></th>
+        <th><font size="4">端口状态</font></th>
     </tr>
     </thead>
     <tbody>
     {%for key,value in dict.items %}
     <tr>
-        <td>{{key}}</td>
-        <td>{{value}}</td>
+        <td align="center"><font size="4">{{key}}</font></td>
+        <tdalign="center"><font size="4">{{value}}</font></td>
     </tr>
     {%endfor%}
     </tbody>

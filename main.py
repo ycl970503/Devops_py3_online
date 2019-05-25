@@ -78,6 +78,7 @@ def main():
     if key_not_login_list:
         for item in key_not_login_list:
             result = nm.query(item)
+            print("^^^^^^^^^^^^^^^^^^^result:",result)
             if result:
                 HostLoginifo.objects.update_or_create(ip=item,hostname=result,mathine_type="Network device")
             else:

@@ -119,6 +119,9 @@ def adhoc_task(request):
             finally:
                 return HttpResponse(json.dumps(result), content_type="application/json")
 
+
+
+
 # Create your views here.
 def adhoc_task_log(request):
     if request.method == "GET":

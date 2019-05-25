@@ -20,19 +20,19 @@
         <form action="/record/revisee_net/" method="">
             {% csrf_token %}
                 <div class="form-group">
-                    <label for="" class="col-sm-2 control-label">设备IP地址：</label>
+                    <label for="" class="col-sm-2 control-label"><font size="4">设备IP地址：</font></label>
                     <div class="col-sm-3">
                     <input type="text" class="form-control" name="list" id="list" value="{{list}}" readonly unselectable="on">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-sm-2 control-label">机柜编号：</label>
+                    <label for="" class="col-sm-2 control-label"><font size="4">机柜编号：</font></label>
                     <div class="col-sm-3">
                     <input type="text" class="form-control" name="net_cab" id="net_cab" value="{{net_cab}}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="" class="col-sm-2 control-label">机柜层数：</label>
+                    <label for="" class="col-sm-2 control-label"><font size="4">机柜层数：</font></label>
                     <div class="col-sm-3">
                     <input type="text" class="form-control" name="net_u" id="net_u" value="{{net_u}}">
                     </div>
@@ -40,8 +40,8 @@
                 <div class="form-group">
                 <label for="" class="col-sm-2 control-label"></label>
                     <div class="col-sm-3">
-                <button type="reset" >重置</button>
-                <button type="submit" style="margin-left: 80px;">提交</button>
+                        <button type="reset" ><font size="4">重置</font></button>
+                        <button type="submit" style="margin-left: 80px;"><font size="4">提交</font></button>
                     </div>
                </div>
             </form>

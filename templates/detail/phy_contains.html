@@ -3,7 +3,10 @@
 {%load filters%}
 <style>
     table th {
-        text-align: left;
+        text-align: center;
+    }
+    table td {
+        text-align: center;
     }
 </style>
 {%endblock head%}
@@ -13,30 +16,30 @@
 <table id="" class="table table-bordered table-hover table-striped">
     <thead>
     <th colspan="8" style="background:#E3E3E3;">
-        <h4 style="background:#E3E3E3; text-align:center; font-weight:bold">宿主机信息</h4>
+        <h4 style="background:#E3E3E3; text-align:center; font-weight:bold"><font size="5">宿主机信息</font></h4>
     </th>
     <tr>
-        <th>ID</th>
-        <th>服务器IP</th>
-        <th>服务器类型</th>
-        <th>操作系统主机名</th>
-        <th>操作系统版本</th>
-        <th>使用状态</th>
-        <th>连接的用户</th>
-        <th>查看</th>
+        <th><font size="4">ID</font></th>
+        <th><font size="4">服务器IP</font></th>
+        <th><font size="4">服务器类型</font></th>
+        <th><font size="4">操作系统主机名</font></th>
+        <th><font size="4">操作系统版本</font></th>
+        <th><font size="4">使用状态</font></th>
+        <th><font size="4">连接的用户</font></th>
+        <th><font size="4">查看</font></th>
     </tr>
     </thead>
     <tbody>
     {%for vir_server in page%}
     <tr>
-        <td>{{vir_server.id}}</td>
-        <td>{{vir_server.server_ip}}</td>
-        <td>{{vir_server.server_type}}</td>
-        <td>{{vir_server.sys_hostname}}</td>
-        <td>{{vir_server.system_ver}}</td>
-        <td>{{ sn_states|get_state:vir_server.conn_vir_id }}</td>
-        <td><a href="/detail_c/?dID={{vir_server.conn_vir.id}}" target="_blank">用户ID={{vir_server.conn_vir.id}}</a></td>
-        <td><a href="/detail_v/?dID={{vir_server.id}}" target="_blank">详情</a></td>
+        <td><font size="4">{{vir_server.id}}</font></td>
+        <td><font size="4">{{vir_server.server_ip}}</font></td>
+        <td><font size="4">{{vir_server.server_type}}</font></td>
+        <td><font size="4">{{vir_server.sys_hostname}}</font></td>
+        <td><font size="4">{{vir_server.system_ver}}</font></td>
+        <td><font size="4">{{ sn_states|get_state:vir_server.conn_vir_id }}</font></td>
+        <td><a href="/detail_c/?dID={{vir_server.conn_vir.id}}" target="_blank"><font size="4">用户ID={{vir_server.conn_vir.id}}</font></a></td>
+        <td><a href="/detail_v/?dID={{vir_server.id}}" target="_blank"><font size="4">详情</font></a></td>
     </tr>
     {%endfor%}
     </tbody>
