@@ -149,7 +149,7 @@ class J_net_do():
     def getToday(self):
         return datetime.date.today()
 
-    def cisco_backup(self,back_server="",sw_backup=False):
+    def cisco_backup(self,back_server="",sw_backup=True):
         result = {}
         try:
             np = pexpect.spawn('telnet %s'%(self.ip))

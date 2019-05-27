@@ -4,6 +4,9 @@
     table th {
         text-align: center;
     }
+    table td {
+        text-align: center;
+    }
 </style>
 {%endblock head%}
 
@@ -16,14 +19,19 @@
     <tr>
         <th><font size="4">所有端口</font></th>
         <th><font size="4">端口状态</font></th>
+        <th><font size="4">端口MAC地址</font></th>
     </tr>
     </thead>
     <tbody>
     {%for key,value in dict.items %}
+
     <tr>
-        <td align="center"><font size="4">{{key}}</font></td>
-        <tdalign="center"><font size="4">{{value}}</font></td>
+        <td><font size="4">{{key}}</font></td>
+        {%for x in value%}
+        <td><font size="4">{{x}}</font></td>
+        {%endfor%}
     </tr>
+
     {%endfor%}
     </tbody>
 </table>

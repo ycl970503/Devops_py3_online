@@ -108,7 +108,7 @@ def main():
     net_login_dct = {}
     with open("%s/conf/net_dev.pass"%BASE_DIR,'r') as f:
           for item in f.readlines():
-              ip, username, passwd,en_passwd = re.split("\s+",item)[:4]
+              ip, username, passwd, en_passwd = re.split( "\s+", item)[:4]
               net_login_dct[ip] = (username,passwd,en_passwd)
           if n_login_sw == "True":
               res = NetDevLogin(dev_ips=net_login_dct,backup_sw=n_backup_sw,back_server=n_backup_sever)

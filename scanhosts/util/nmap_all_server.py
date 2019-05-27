@@ -560,7 +560,6 @@ def NetDevLogin(dev_ips={},backup_sw="True",back_server=""):
     for ip,login_info in dev_ips.items():
         #True就执行备份，False就执行登录
         if backup_sw == "True":
-
             jn = J_net_do(ip,login_info)
             res = jn.cisco_backup(back_server=back_server,sw_backup=True)
         else:

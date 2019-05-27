@@ -121,13 +121,13 @@ def getPortIP(host, community):
 def getPortMAC(host, community):
     """获取端口MAC信息"""
     device_mib = snmpWalk(host, community, 'RFC1213-MIB::ifPhysAddress')
+    # print("MAC Address", device_mib)
     device_list = []
     for item in device_mib:
-        if item.split('"')[2].strip()=='':
-            device_list.append('')
-        else:
+        if len(item) < 40:
+            device_list.append('Null')
+        else :
             device_list.append(item.split(':')[3].strip())
-    print(device_list)
     return device_list
 
 
@@ -137,23 +137,18 @@ def login(request,param):
     print('=' * 10 + param + '=' * 10)
     start = time.time()
     print("system info")
-    dict = defaultdict(list)
+    # dict = defaultdict(list)
+    dict={}
     DeviceList = getPortDevices(param, community)
     DeviceStatus = getPortStatus(param, community)
-    PortMAC = getPortMAC(param, community)
+    DeviceMac = getPortMAC(param, community)
     for item in DeviceList:
         sta_index = DeviceList.index(item)
-        mac_index = DeviceList.index(item)
-        # list = [DeviceStatus[sta_index],PortIP(ip_index)]
-
-        dict[item].append(DeviceStatus[sta_index])
-        # dict[item].append(PortMAC(mac_index))
-
-
-        # dict.update({item:list})
-    print(dict)
-
-    return render(request, 'operations/login.html', {'dict':dict})
+        print("Port:" + item + " Status:" + DeviceStatus[sta_index]+"MACCCCCCCCCCCC :  "+DeviceMac[sta_index])
+        dict.setdefault(item,[]).append(DeviceStatus[sta_index])
+        dict.setdefault(item, []).append(DeviceMac[sta_index])
+        print(dict)
+    return render(request, 'operations/login.html', {'dict': dict})
 
 
 
